@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DL Project Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>DL Project Dashboard</h1>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h2>Upload an Image to Extract Text</h2>
+        <p>Drag and drop your image or click to select from your computer.</p>
+
+        <div class="upload-area" id="uploadfile" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input type="file" id="fileElem" name="image" accept="image/*" required
+                    onchange="handleFiles(this.files)">
+                <label class="button" for="fileElem">Click to Upload an Image</label>
+            </form>
+        </div>
+
+        <div id="result">
+            {% if result %}
+            <h2>Extracted Text:</h2>
+            <p>{{ result }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 DL Project Dashboard. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Drag and drop functionality
+        function dropHandler(event) {
+            event.preventDefault();
+            const files = event.dataTransfer.files;
+            document.getElementById('fileElem').files = files;
+        }
+
+        function dragOverHandler(event) {
+            event.preventDefault();
+        }
+    </script>
+
+</body>
+
+</html>
